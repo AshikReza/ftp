@@ -44,6 +44,20 @@ class NEXORARepository {
       console.warn('Failed to load catalog from disk:', e);
     }
 
+    // Fallback to committed bundled seed catalog (critical for Vercel, cloud & offline environments)
+    if (this.catalog.size === 0) {
+      try {
+        const SEED_CATALOG_FILE = path.join(process.cwd(), 'lib', 'data', 'bundled-catalog.json');
+        if (fs.existsSync(SEED_CATALOG_FILE)) {
+          const raw = fs.readFileSync(SEED_CATALOG_FILE, 'utf8');
+          const items: Content[] = JSON.parse(raw);
+          items.forEach(item => this.catalog.set(item.id, item));
+        }
+      } catch (e) {
+        console.warn('Failed to load bundled seed catalog:', e);
+      }
+    }
+
     try {
       if (fs.existsSync(JOBS_FILE)) {
         const raw = fs.readFileSync(JOBS_FILE, 'utf8');
