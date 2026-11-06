@@ -1,26 +1,101 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #08090D;
+    --surface: #0D0F17;
+    --surface-elevated: #141722;
+    --surface-hover: #1A1E2C;
+    --text-primary: #F5F5F7;
+    --text-secondary: #9296A5;
+    --text-muted: #64687A;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-active: rgba(255, 255, 255, 0.18);
+    --cinema-accent: #F0142F;
+    --cinema-accent-glow: rgba(240, 20, 47, 0.25);
+    --learning-accent: #7957F5;
+    --gaming-accent: #00F0FF;
+    --software-accent: #3B82F6;
+    --success-accent: #16B96A;
+    --premium-accent: #F5C518;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    selection-background-color: rgba(240, 20, 47, 0.3);
+  }
+
+  ::selection {
+    background-color: rgba(240, 20, 47, 0.3);
+    color: #FFFFFF;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #08090D;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Helper utility classes */
+.glass-panel {
+  background: rgba(13, 15, 23, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-nav {
+  background: rgba(8, 9, 13, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.85);
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.cinematic-vignette {
+  background: radial-gradient(circle at center, transparent 30%, rgba(8, 9, 13, 0.85) 100%);
+}
+
+/* Custom sleek hidden scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Ultra-premium glassmorphism dropdown container */
+.glass-dropdown {
+  background: rgba(11, 14, 22, 0.85);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.95), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+.hero-gradient-overlay {
+  background: linear-gradient(180deg, rgba(8,9,13,0.1) 0%, rgba(8,9,13,0.6) 60%, #08090D 100%);
+}
+
+.hero-side-gradient {
+  background: linear-gradient(90deg, #08090D 0%, rgba(8,9,13,0.8) 35%, transparent 70%);
 }
